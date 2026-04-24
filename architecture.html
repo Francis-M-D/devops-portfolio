@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Diagrams - Maria Francis D DevOps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-bright: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            sticky: top 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .diagram-section {
+            margin-bottom: 4rem;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .diagram-section:hover {
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .diagram-header {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.1) 100%);
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .diagram-header h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .diagram-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .diagram-body {
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 0.25rem;
+        }
+
+        .legend-item-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .diagram-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .diagram-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">MFD</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>🏗️ Architecture Diagrams</h1>
+
+        <!-- MindTrack Diagram -->
+        <div class="diagram-section">
+            <div class="diagram-header">
+                <h2>MindTrack CI/CD Pipeline</h2>
+                <p>AWS CodePipeline + Kubernetes Deployment Architecture</p>
+            </div>
+            <div class="diagram-body">
+                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1e293b;stop-opacity:0.5" />
+                            <stop offset="100%" style="stop-color:#0f172a;stop-opacity:0.5" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- GitHub -->
+                    <rect x="30" y="180" width="120" height="80" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="90" y="220" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">GitHub</text>
+                    <text x="90" y="240" text-anchor="middle" fill="#cbd5e1" font-size="11">Repository</text>
+
+                    <!-- Arrow 1 -->
+                    <path d="M 150 220 L 210 220" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- AWS CodePipeline -->
+                    <rect x="210" y="180" width="140" height="80" fill="#FF9900" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="280" y="215" text-anchor="middle" fill="#000" font-size="13" font-weight="bold">CodePipeline</text>
+                    <text x="280" y="235" text-anchor="middle" fill="#000" font-size="11">Webhook Trigger</text>
+
+                    <!-- Arrow 2 -->
+                    <path d="M 350 220 L 410 220" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                    <!-- CodeBuild -->
+                    <rect x="410" y="180" width="120" height="80" fill="#FF9900" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="470" y="220" text-anchor="middle" fill="#000" font-size="13" font-weight="bold">CodeBuild</text>
+                    <text x="470" y="240" text-anchor="middle" fill="#000" font-size="11">Build & Test</text>
+
+                    <!-- Arrow 3 -->
+                    <path d="M 530 220 L 590 220" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                    <!-- ECR -->
+                    <rect x="590" y="180" width="120" height="80" fill="#FF9900" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="650" y="220" text-anchor="middle" fill="#000" font-size="13" font-weight="bold">Amazon ECR</text>
+                    <text x="650" y="240" text-anchor="middle" fill="#000" font-size="11">Docker Images</text>
+
+                    <!-- Arrow 4 -->
+                    <path d="M 710 220 L 770 220" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                    <!-- Kubernetes EKS -->
+                    <rect x="770" y="180" width="130" height="80" fill="#326CE5" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="835" y="215" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">EKS</text>
+                    <text x="835" y="235" text-anchor="middle" fill="#f1f5f9" font-size="11">Production</text>
+
+                    <!-- Benefits boxes -->
+                    <text x="50" y="330" font-size="14" font-weight="bold" fill="#3b82f6">✓ 40% faster deployments</text>
+                    <text x="50" y="360" font-size="14" font-weight="bold" fill="#10b981">✓ Fully automated pipeline</text>
+                    <text x="50" y="390" font-size="14" font-weight="bold" fill="#3b82f6">✓ Container orchestration</text>
+
+                    <text x="550" y="330" font-size="14" font-weight="bold" fill="#10b981">✓ Scalable infrastructure</text>
+                    <text x="550" y="360" font-size="14" font-weight="bold" fill="#3b82f6">✓ Zero-downtime updates</text>
+                    <text x="550" y="390" font-size="14" font-weight="bold" fill="#10b981">✓ Self-healing clusters</text>
+                </svg>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #334155;"></div>
+                        <span class="legend-item-text">Source Control</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FF9900;"></div>
+                        <span class="legend-item-text">AWS Services</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #326CE5;"></div>
+                        <span class="legend-item-text">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TrendStore Diagram -->
+        <div class="diagram-section">
+            <div class="diagram-header">
+                <h2>TrendStore CI/CD Pipeline</h2>
+                <p>Jenkins + Terraform + Kubernetes + Monitoring Architecture</p>
+            </div>
+            <div class="diagram-body">
+                <svg viewBox="0 0 1000 550" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Jenkins -->
+                    <rect x="30" y="40" width="110" height="80" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="85" y="75" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Jenkins</text>
+                    <text x="85" y="95" text-anchor="middle" fill="#cbd5e1" font-size="10">Pipeline</text>
+
+                    <!-- Arrow -->
+                    <path d="M 140 80 L 200 80" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+                    <defs>
+                        <marker id="arrowhead1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Docker Build -->
+                    <rect x="200" y="40" width="110" height="80" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="255" y="75" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Docker</text>
+                    <text x="255" y="95" text-anchor="middle" fill="#cbd5e1" font-size="10">Build & Push</text>
+
+                    <!-- Arrow -->
+                    <path d="M 310 80 L 370 80" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+
+                    <!-- Terraform -->
+                    <rect x="370" y="40" width="110" height="80" fill="#7B42BC" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="425" y="75" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Terraform</text>
+                    <text x="425" y="95" text-anchor="middle" fill="#f1f5f9" font-size="10">IaC Provision</text>
+
+                    <!-- Arrow -->
+                    <path d="M 480 80 L 540 80" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+
+                    <!-- Kubernetes Deployment -->
+                    <rect x="540" y="40" width="120" height="80" fill="#326CE5" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="600" y="75" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">EKS</text>
+                    <text x="600" y="95" text-anchor="middle" fill="#f1f5f9" font-size="10">Kubernetes</text>
+
+                    <!-- Arrow down to monitoring -->
+                    <path d="M 600 120 L 600 180" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+
+                    <!-- Monitoring Stack -->
+                    <g>
+                        <!-- Prometheus -->
+                        <rect x="480" y="180" width="110" height="80" fill="#E36533" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                        <text x="535" y="215" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Prometheus</text>
+                        <text x="535" y="235" text-anchor="middle" fill="#f1f5f9" font-size="10">Metrics</text>
+
+                        <!-- Arrow -->
+                        <path d="M 590 220 L 650 220" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+
+                        <!-- Grafana -->
+                        <rect x="650" y="180" width="110" height="80" fill="#F05A28" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                        <text x="705" y="215" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Grafana</text>
+                        <text x="705" y="235" text-anchor="middle" fill="#f1f5f9" font-size="10">Dashboards</text>
+                    </g>
+
+                    <!-- Deployment Flow Steps -->
+                    <text x="40" y="350" font-size="14" font-weight="bold" fill="#3b82f6">Deployment Flow:</text>
+                    <text x="40" y="380" font-size="12" fill="#cbd5e1">1. Webhook triggers Jenkins pipeline</text>
+                    <text x="40" y="405" font-size="12" fill="#cbd5e1">2. Build Docker image with tests</text>
+                    <text x="40" y="430" font-size="12" fill="#cbd5e1">3. Terraform provisions AWS infrastructure</text>
+                    <text x="40" y="455" font-size="12" fill="#cbd5e1">4. Deploy to EKS with zero-downtime updates</text>
+                    <text x="40" y="480" font-size="12" fill="#cbd5e1">5. Prometheus monitors app health & Grafana visualizes</text>
+
+                    <!-- Benefits -->
+                    <text x="520" y="350" font-size="14" font-weight="bold" fill="#10b981">Key Achievements:</text>
+                    <text x="520" y="380" font-size="12" fill="#cbd5e1">✓ 50% infrastructure setup time reduction</text>
+                    <text x="520" y="405" font-size="12" fill="#cbd5e1">✓ Multi-stage Jenkins pipelines</text>
+                    <text x="520" y="430" font-size="12" fill="#cbd5e1">✓ Real-time monitoring & alerting</text>
+                    <text x="520" y="455" font-size="12" fill="#cbd5e1">✓ Fully automated deployments</text>
+                </svg>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #334155;"></div>
+                        <span class="legend-item-text">CI/CD Tools</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #7B42BC;"></div>
+                        <span class="legend-item-text">Infrastructure as Code</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #326CE5;"></div>
+                        <span class="legend-item-text">Container Orchestration</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #E36533;"></div>
+                        <span class="legend-item-text">Monitoring Stack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- React App Diagram -->
+        <div class="diagram-section">
+            <div class="diagram-header">
+                <h2>React Application Deployment Pipeline</h2>
+                <p>Jenkins + Docker + Terraform + Ansible Architecture</p>
+            </div>
+            <div class="diagram-body">
+                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- GitHub with branching -->
+                    <rect x="30" y="150" width="120" height="100" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="90" y="190" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">GitHub</text>
+                    <text x="90" y="212" text-anchor="middle" fill="#cbd5e1" font-size="10">dev / master</text>
+                    <text x="90" y="232" text-anchor="middle" fill="#cbd5e1" font-size="10">branches</text>
+
+                    <!-- Arrow -->
+                    <path d="M 150 200 L 210 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+                    <defs>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Jenkins -->
+                    <rect x="210" y="150" width="120" height="100" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="270" y="190" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Jenkins</text>
+                    <text x="270" y="212" text-anchor="middle" fill="#cbd5e1" font-size="10">Webhook</text>
+                    <text x="270" y="232" text-anchor="middle" fill="#cbd5e1" font-size="10">Pipeline</text>
+
+                    <!-- Arrow -->
+                    <path d="M 330 200 L 390 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+
+                    <!-- Docker -->
+                    <rect x="390" y="150" width="120" height="100" fill="#334155" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="450" y="190" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Docker</text>
+                    <text x="450" y="212" text-anchor="middle" fill="#cbd5e1" font-size="10">Build & Push</text>
+                    <text x="450" y="232" text-anchor="middle" fill="#cbd5e1" font-size="10">Docker Hub</text>
+
+                    <!-- Arrow -->
+                    <path d="M 510 200 L 570 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+
+                    <!-- Terraform -->
+                    <rect x="570" y="150" width="120" height="100" fill="#7B42BC" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="630" y="190" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Terraform</text>
+                    <text x="630" y="212" text-anchor="middle" fill="#f1f5f9" font-size="10">EC2 Provision</text>
+                    <text x="630" y="232" text-anchor="middle" fill="#f1f5f9" font-size="10">&amp; VPC Config</text>
+
+                    <!-- Arrow -->
+                    <path d="M 690 200 L 750 200" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+
+                    <!-- Ansible -->
+                    <rect x="750" y="150" width="120" height="100" fill="#EE0000" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                    <text x="810" y="190" text-anchor="middle" fill="#f1f5f9" font-size="13" font-weight="bold">Ansible</text>
+                    <text x="810" y="212" text-anchor="middle" fill="#f1f5f9" font-size="10">Deploy App</text>
+                    <text x="810" y="232" text-anchor="middle" fill="#f1f5f9" font-size="10">&amp; Config</text>
+
+                    <!-- Bottom section: Results -->
+                    <text x="40" y="330" font-size="14" font-weight="bold" fill="#3b82f6">✓ Environment-based deployments (dev/prod)</text>
+                    <text x="40" y="360" font-size="14" font-weight="bold" fill="#10b981">✓ 60% reduction in manual deployment effort</text>
+                    <text x="40" y="390" font-size="14" font-weight="bold" fill="#3b82f6">✓ Dynamic security group updates</text>
+                    <text x="40" y="420" font-size="14" font-weight="bold" fill="#10b981">✓ Production-ready HTTP deployment (port 80)</text>
+                    <text x="40" y="450" font-size="14" font-weight="bold" fill="#3b82f6">✓ Fully automated from commit to production</text>
+                </svg>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #334155;"></div>
+                        <span class="legend-item-text">Source Control & CI</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #7B42BC;"></div>
+                        <span class="legend-item-text">Infrastructure Provisioning</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #EE0000;"></div>
+                        <span class="legend-item-text">Configuration & Deployment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

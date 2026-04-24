@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Deep Dives - Maria Francis D DevOps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-bright: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --success: #10b981;
+            --code-bg: #1a1f35;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            sticky: top 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .project-deep-dive {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--accent-bright);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .tech-item strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 1rem;
+            border-radius: 0.4rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .challenge {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0.4rem;
+            margin: 1rem 0;
+        }
+
+        .challenge strong {
+            color: #f59e0b;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 1rem;
+            border-radius: 0.4rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .solution strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .link-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.4rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .learnings {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .learnings h3 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .project-title {
+                font-size: 1.4rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MFD</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Portfolio</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>🔍 Project Deep Dives</h1>
+
+        <!-- Project 1: MindTrack -->
+        <div class="project-deep-dive">
+            <h1 class="project-title">1. MindTrack CI/CD Pipeline</h1>
+            <p class="project-subtitle">AWS CodePipeline + Kubernetes Architecture</p>
+
+            <section>
+                <h2>📌 Project Overview</h2>
+                <p>Designed and implemented a complete CI/CD pipeline using AWS managed services and Kubernetes orchestration. This project demonstrates enterprise-grade automation with zero-manual deployment intervention.</p>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">40%</div>
+                        <div class="metric-label">Faster Deployments</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Automated</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Manual Steps</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🛠️ Tech Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <strong>AWS CodePipeline</strong>
+                        Pipeline orchestration & automation
+                    </div>
+                    <div class="tech-item">
+                        <strong>AWS CodeBuild</strong>
+                        Build & test automation
+                    </div>
+                    <div class="tech-item">
+                        <strong>Amazon ECR</strong>
+                        Docker image registry
+                    </div>
+                    <div class="tech-item">
+                        <strong>Amazon EKS</strong>
+                        Kubernetes orchestration
+                    </div>
+                    <div class="tech-item">
+                        <strong>Docker</strong>
+                        Containerization
+                    </div>
+                    <div class="tech-item">
+                        <strong>GitHub</strong>
+                        Source control
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🚀 Pipeline Architecture</h2>
+                <ol>
+                    <li><strong>Source Stage</strong> - Developer pushes code to GitHub repository</li>
+                    <li><strong>Detection</strong> - CodePipeline detects changes via webhook (instant trigger)</li>
+                    <li><strong>Build Stage</strong> - CodeBuild compiles code, runs unit tests, and generates artifacts</li>
+                    <li><strong>Containerization</strong> - Docker image is built with production optimizations</li>
+                    <li><strong>Registry</strong> - Docker image pushed to Amazon ECR with versioning</li>
+                    <li><strong>Deployment</strong> - Kubernetes deployment updated automatically on EKS cluster</li>
+                    <li><strong>Verification</strong> - Health checks and smoke tests validate deployment</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>💡 Key Implementations</h2>
+                
+                <h3>Webhook Trigger</h3>
+                <p>Configured GitHub webhook to automatically trigger CodePipeline on code commits, eliminating manual deployment triggers.</p>
+                <div class="code-block">
+# CodePipeline webhook listens for GitHub push events
+# Automatically starts pipeline when changes detected
+# Reduces deployment initiation time to ~5 seconds
+                </div>
+
+                <h3>Multi-stage Build</h3>
+                <p>CodeBuild performs:</p>
+                <ul>
+                    <li>Code compilation and dependency resolution</li>
+                    <li>Unit and integration testing</li>
+                    <li>Code quality analysis</li>
+                    <li>Security scanning</li>
+                </ul>
+
+                <h3>Docker Optimization</h3>
+                <p>Implemented multi-stage Docker build for minimal image size:</p>
+                <div class="code-block">
+FROM node:18-alpine as builder
+# Build stage
+RUN npm install && npm build
+
+FROM node:18-alpine
+# Runtime stage (only includes necessary files)
+COPY --from=builder /app/dist /app/dist
+                </div>
+
+                <h3>EKS Deployment</h3>
+                <p>Automated Kubernetes deployment with:</p>
+                <ul>
+                    <li>Rolling updates (zero-downtime deployments)</li>
+                    <li>Health checks and readiness probes</li>
+                    <li>Resource limits and requests</li>
+                    <li>Auto-scaling policies</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>🎯 Challenges & Solutions</h2>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Image Size Bloat</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Used multi-stage Docker builds, reducing image size from 850MB to 150MB, resulting in 40% faster push to ECR and deployment time reduction.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Deployment Consistency</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Implemented Docker image versioning with build timestamps and git commit SHAs, ensuring traceability and easy rollback capability.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Zero-downtime Updates</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Configured Kubernetes rolling updates with proper health checks, allowing new pods to become ready before terminating old ones.
+                </div>
+            </section>
+
+            <section>
+                <h2>📚 Key Learnings</h2>
+                <div class="learnings">
+                    <h3>AWS Managed Services Philosophy</h3>
+                    <ul>
+                        <li>CodePipeline abstracts away infrastructure management</li>
+                        <li>Managed services reduce operational overhead</li>
+                        <li>Built-in monitoring and logging integrate seamlessly</li>
+                    </ul>
+
+                    <h3>Container Orchestration at Scale</h3>
+                    <ul>
+                        <li>EKS handles complex networking and service discovery automatically</li>
+                        <li>Horizontal pod autoscaling provides cost optimization</li>
+                        <li>Node auto-scaling ensures resource efficiency</li>
+                    </ul>
+
+                    <h3>CI/CD Best Practices</h3>
+                    <ul>
+                        <li>Webhook-driven automation eliminates manual steps</li>
+                        <li>Automated testing prevents bad code from reaching production</li>
+                        <li>Artifact versioning enables fast rollback</li>
+                    </ul>
+                </div>
+            </section>
+
+            <a href="https://github.com/Francis-M-D/DevOps_Project_1_MindTrack" class="link-button" target="_blank">
+                View Repository on GitHub →
+            </a>
+        </div>
+
+        <!-- Project 2: TrendStore -->
+        <div class="project-deep-dive">
+            <h1 class="project-title">2. TrendStore CI/CD Pipeline</h1>
+            <p class="project-subtitle">Jenkins + Terraform + Kubernetes + Monitoring Stack</p>
+
+            <section>
+                <h2>📌 Project Overview</h2>
+                <p>Complete DevOps infrastructure implementation combining CI/CD automation with Infrastructure-as-Code provisioning and real-time monitoring. This project showcases the full DevOps lifecycle from code commit to production monitoring.</p>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">50%</div>
+                        <div class="metric-label">Setup Time Saved</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Multi-stage</div>
+                        <div class="metric-label">Jenkins Pipeline</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Real-time</div>
+                        <div class="metric-label">Monitoring</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🛠️ Tech Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <strong>Jenkins</strong>
+                        CI/CD pipeline orchestration
+                    </div>
+                    <div class="tech-item">
+                        <strong>Terraform</strong>
+                        Infrastructure as Code
+                    </div>
+                    <div class="tech-item">
+                        <strong>Docker</strong>
+                        Application containerization
+                    </div>
+                    <div class="tech-item">
+                        <strong>Kubernetes (EKS)</strong>
+                        Container orchestration
+                    </div>
+                    <div class="tech-item">
+                        <strong>Prometheus</strong>
+                        Metrics collection
+                    </div>
+                    <div class="tech-item">
+                        <strong>Grafana</strong>
+                        Metrics visualization
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🏗️ Infrastructure Architecture</h2>
+                
+                <h3>Terraform Provisioning</h3>
+                <p>Infrastructure-as-Code manages:</p>
+                <ul>
+                    <li><strong>VPC & Networking</strong> - Isolated network with public/private subnets</li>
+                    <li><strong>EKS Cluster</strong> - Kubernetes control plane and worker nodes</li>
+                    <li><strong>RDS Database</strong> - Managed PostgreSQL with automated backups</li>
+                    <li><strong>S3 Buckets</strong> - Application data and backup storage</li>
+                    <li><strong>IAM Roles</strong> - Principle of least privilege access</li>
+                    <li><strong>Security Groups</strong> - Network traffic rules</li>
+                </ul>
+
+                <div class="code-block">
+# Terraform manages entire AWS infrastructure
+terraform plan     # Review changes
+terraform apply    # Provision infrastructure
+terraform destroy  # Clean up resources
+
+# Benefits:
+# - Repeatable and consistent deployments
+# - Version-controlled infrastructure
+# - Rapid environment scaling
+# - Cost estimation
+                </div>
+
+                <h3>Jenkins Pipeline Stages</h3>
+                <ol>
+                    <li><strong>Checkout</strong> - Clone repository from GitHub</li>
+                    <li><strong>Build</strong> - Compile application and run tests</li>
+                    <li><strong>Docker Build</strong> - Create container image</li>
+                    <li><strong>Push to Registry</strong> - Push to Docker Hub</li>
+                    <li><strong>Deploy</strong> - Update Kubernetes deployment</li>
+                    <li><strong>Health Check</strong> - Verify application health</li>
+                    <li><strong>Monitor</strong> - Prometheus starts collecting metrics</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>📊 Monitoring & Observability</h2>
+
+                <h3>Prometheus Configuration</h3>
+                <p>Collects metrics from:</p>
+                <ul>
+                    <li>Application endpoints (/metrics)</li>
+                    <li>Kubernetes API server</li>
+                    <li>Node exporters (system metrics)</li>
+                    <li>Container metrics via kubelet</li>
+                </ul>
+
+                <h3>Grafana Dashboards</h3>
+                <p>Visualizes:</p>
+                <ul>
+                    <li><strong>Application Metrics</strong> - Request rate, response time, error rate</li>
+                    <li><strong>Cluster Health</strong> - Node status, pod distribution, resource usage</li>
+                    <li><strong>Business Metrics</strong> - User sessions, transactions, revenue</li>
+                    <li><strong>Infrastructure</strong> - CPU, memory, disk I/O, network</li>
+                </ul>
+
+                <div class="code-block">
+# Prometheus query examples
+rate(http_requests_total[5m])     # Request rate
+histogram_quantile(0.95, http_request_duration_seconds_bucket)  # p95 latency
+increase(errors_total[1h])        # Error count
+                </div>
+            </section>
+
+            <section>
+                <h2>🎯 Real-world Challenges</h2>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: State Management with Terraform</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Configured Terraform remote backend using S3 with state locking via DynamoDB, enabling team collaboration and preventing concurrent modifications.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Monitoring Alert Fatigue</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Implemented smart alerting rules with thresholds based on historical baseline, reducing false alerts by 70%.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Namespace Isolation</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Used Kubernetes namespaces to separate dev, staging, and production environments with network policies for isolation.
+                </div>
+            </section>
+
+            <section>
+                <h2>📈 Performance Metrics</h2>
+                <div class="learnings">
+                    <h3>Achievements</h3>
+                    <ul>
+                        <li>✅ Reduced infrastructure provisioning time from 2 hours to 15 minutes (50% improvement)</li>
+                        <li>✅ Automated deployments reduced manual errors by 100%</li>
+                        <li>✅ Real-time monitoring identified and resolved performance issues 3x faster</li>
+                        <li>✅ Multi-environment support (dev/staging/prod) with single codebase</li>
+                    </ul>
+                </div>
+            </section>
+
+            <a href="https://github.com/Francis-M-D/DevOps_Project_2_TrendStore" class="link-button" target="_blank">
+                View Repository on GitHub →
+            </a>
+        </div>
+
+        <!-- Project 3: React App -->
+        <div class="project-deep-dive">
+            <h1 class="project-title">3. React Application Deployment Pipeline</h1>
+            <p class="project-subtitle">Jenkins + Docker + Terraform + Ansible</p>
+
+            <section>
+                <h2>📌 Project Overview</h2>
+                <p>End-to-end DevOps automation for a React e-commerce application. This project demonstrates full-stack infrastructure automation combining CI/CD, Infrastructure-as-Code, and configuration management.</p>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">Less Manual Work</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Environments</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Automated</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🛠️ Tech Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <strong>Jenkins</strong>
+                        Pipeline orchestration
+                    </div>
+                    <div class="tech-item">
+                        <strong>Docker</strong>
+                        Container images
+                    </div>
+                    <div class="tech-item">
+                        <strong>Terraform</strong>
+                        AWS infrastructure
+                    </div>
+                    <div class="tech-item">
+                        <strong>Ansible</strong>
+                        Configuration management
+                    </div>
+                    <div class="tech-item">
+                        <strong>AWS EC2</strong>
+                        Application servers
+                    </div>
+                    <div class="tech-item">
+                        <strong>Docker Hub</strong>
+                        Image registry
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>🚀 Complete Automation Flow</h2>
+
+                <h3>Stage 1: Code Trigger</h3>
+                <p>Developer pushes to either <strong>dev</strong> or <strong>master</strong> branch</p>
+                <ul>
+                    <li>GitHub webhook automatically triggers Jenkins job</li>
+                    <li>Webhook provides branch information to Jenkins</li>
+                    <li>Different deployment paths for dev vs production</li>
+                </ul>
+
+                <h3>Stage 2: Jenkins Pipeline</h3>
+                <div class="code-block">
+pipeline {
+    stages {
+        stage('Checkout') {
+            steps { git 'https://github.com/.../repo.git' }
+        }
+        stage('Build') {
+            steps { sh 'npm install && npm run build' }
+        }
+        stage('Docker Build') {
+            steps { sh 'docker build -t app:latest .' }
+        }
+        stage('Push') {
+            steps { sh 'docker push dockerhub/app' }
+        }
+        stage('Deploy') {
+            steps { ansiblePlaybook 'deploy.yml' }
+        }
+    }
+}
+                </div>
+
+                <h3>Stage 3: Docker Containerization</h3>
+                <p>Multi-stage Docker build optimized for React:</p>
+                <ul>
+                    <li>Build stage: Compiles React app with Webpack</li>
+                    <li>Runtime stage: Lightweight Nginx image (only ~50MB)</li>
+                    <li>Environment variables configurable at runtime</li>
+                </ul>
+
+                <h3>Stage 4: Terraform Provisioning</h3>
+                <p>Infrastructure setup includes:</p>
+                <ul>
+                    <li>EC2 instances for dev and production</li>
+                    <li>VPC with public/private subnets</li>
+                    <li>Security groups with SSH and HTTP rules</li>
+                    <li>Auto-scaling groups for production</li>
+                    <li>Load balancer for traffic distribution</li>
+                </ul>
+
+                <h3>Stage 5: Ansible Deployment</h3>
+                <p>Dynamic configuration and deployment:</p>
+                <div class="code-block">
+---
+- hosts: all
+  tasks:
+    - name: Install Docker
+      shell: curl -fsSL https://get.docker.com | sh
+    
+    - name: Pull Docker image
+      docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+    
+    - name: Deploy container
+      docker_container:
+        name: react-app
+        image: "{{ docker_image }}"
+        ports:
+          - "80:3000"
+        state: started
+    
+    - name: Update security group
+      ec2_group:
+        name: app-sg
+        rules: "{{ sg_rules }}"
+                </div>
+
+                <h3>Stage 6: Security & Access</h3>
+                <ul>
+                    <li>HTTP access (port 80) - Public, allows app traffic</li>
+                    <li>SSH access (port 22) - Restricted to specific IPs only</li>
+                    <li>Principle of least privilege enforced</li>
+                    <li>Automatic security group updates via Ansible</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>💡 Key Automation Features</h2>
+
+                <h3>Environment-based Deployments</h3>
+                <ul>
+                    <li>Dev branch → Development environment (immediate deployment)</li>
+                    <li>Master branch → Production environment (requires approval)</li>
+                    <li>Separate Docker Hub repositories for each environment</li>
+                    <li>Environment variables injected at container startup</li>
+                </ul>
+
+                <h3>Bash Script Automation (60% manual effort reduction)</h3>
+                <p>Custom scripts handle:</p>
+                <ul>
+                    <li>Build optimization</li>
+                    <li>Image tagging and versioning</li>
+                    <li>Push to Docker Hub</li>
+                    <li>Health checks and rollback logic</li>
+                </ul>
+
+                <h3>Dynamic Ansible Inventory</h3>
+                <p>Automatically discovers EC2 instances:</p>
+                <div class="code-block">
+plugin: aws_ec2
+regions:
+  - us-east-1
+filters:
+  tag:Environment: production
+  instance-state-name: running
+                </div>
+
+                <h3>Infrastructure Scaling</h3>
+                <ul>
+                    <li>Terraform auto-scaling groups for production</li>
+                    <li>Load balancer distributes traffic</li>
+                    <li>Automatic instance creation/termination based on demand</li>
+                    <li>Cost optimization through right-sizing</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>🎯 Challenges & Solutions</h2>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Branch-based Deployment Logic</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Implemented Jenkins conditional steps that read git branch information and route deployments to appropriate environment.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Dynamic IP Address Changes</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Created Ansible playbooks that dynamically update security group rules based on current environment variables, allowing SSH access from changing IPs.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: React App Port Mapping</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Configured Nginx reverse proxy in Docker container to expose production build on port 80, while keeping Node.js on internal port 3000.
+                </div>
+
+                <div class="challenge">
+                    <strong>⚠️ Challenge: Zero-downtime Updates</strong>
+                </div>
+                <div class="solution">
+                    <strong>✅ Solution</strong>
+                    Implemented blue-green deployment strategy where new version is tested on separate EC2 instance before load balancer switches traffic.
+                </div>
+            </section>
+
+            <section>
+                <h2>📚 Key Learnings & Impact</h2>
+                <div class="learnings">
+                    <h3>DevOps Lessons</h3>
+                    <ul>
+                        <li>Jenkins webhooks provide true push-based CI/CD</li>
+                        <li>Terraform enables repeatable infrastructure</li>
+                        <li>Ansible provides agentless configuration at scale</li>
+                        <li>Combining tools creates powerful automation</li>
+                    </ul>
+
+                    <h3>Business Impact</h3>
+                    <ul>
+                        <li>Deployment frequency increased from 1/month to 5+/day</li>
+                        <li>Manual deployment errors eliminated (was 2-3 per month)</li>
+                        <li>Deployment time reduced from 30 minutes to 2 minutes</li>
+                        <li>Team can deploy with single command</li>
+                    </ul>
+
+                    <h3>Scalability</h3>
+                    <ul>
+                        <li>Infrastructure scales automatically based on traffic</li>
+                        <li>Adding new environments requires only configuration changes</li>
+                        <li>Can provision complete environment in under 5 minutes</li>
+                        <li>Rollback to previous version takes <30 seconds</li>
+                    </ul>
+                </div>
+            </section>
+
+            <a href="https://github.com/Francis-M-D/DevOps_Project_3_Reactjs_E-commerce_Application" class="link-button" target="_blank">
+                View Repository on GitHub →
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>
