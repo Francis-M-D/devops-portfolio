@@ -16,34 +16,6 @@ portfolio will be live at:** `https://francis-m-d.github.io/devops-portfolio/`
 
 ---
 
-## 💡 Interview Talking Points
-
-### For Each Project
-
-#### MindTrack CI/CD Pipeline
-**"I designed a fully automated CI/CD pipeline using AWS managed services..."**
-- Webhook-driven automation (instant triggers)
-- 40% faster deployments
-- Zero manual intervention
-- Kubernetes for production reliability
-
-#### TrendStore CI/CD Pipeline
-**"I built infrastructure-as-code using Terraform and Jenkins..."**
-- 50% reduction in infrastructure setup time
-- Multi-stage Jenkins pipelines
-- Real-time monitoring with Prometheus/Grafana
-- Reproducible environments
-
-#### React App Deployment
-**"I created an end-to-end DevOps pipeline combining multiple tools..."**
-- 60% reduction in manual effort
-- Environment-based deployments (dev/prod)
-- Dynamic configuration with Ansible
-- Automated scaling
-
----
-
-
 ---
 
 ## 📞 Contact Information
